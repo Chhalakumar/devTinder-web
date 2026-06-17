@@ -117,6 +117,9 @@ const NavBar = () => {
                 <Link to="/Requests">Requests</Link>
               </li>
               <li>
+                <Link to="/Premium">Premium</Link>
+              </li>
+              <li>
                 <a onClick={handleLogout}>Logout</a>
               </li>
             </ul>

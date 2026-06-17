@@ -9,6 +9,7 @@ Route = /profile =>Profile
 #deployment:
 -Launch instance
 -chomd 400 <secret>.pem
+ssh -i .\devTinder.pem ubuntu@44.212.47.8
 -ssh -i "devTinder.pem" ubuntu@ec2-44-204-206-149.compute-1.amazonaws.com
 -Install node verdion 16.17.0
 -git clone 
@@ -29,6 +30,21 @@ Route = /profile =>Profile
     ->pm2 start npm -- start //pm2 start npm --name "devTinder-backend" -- start
     ->pm2 list ,pm2 flush <name>,pm2 stop <namae>,pm2 delete <name>
     sudo nano /etc/nginx/sites-available/default
+
+    <!-- ************************************************************************** -->
+    ssh ubuntu@server
+cd backend
+git pull
+npm install
+pm2 restart all
+
+cd frontend
+git pull
+npm install
+npm run build
+sudo cp -r dist/* /var/www/html/
+sudo systemctl reload nginx
+
 
 
 
