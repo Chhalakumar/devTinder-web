@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import UserCard from "./UserCard";
@@ -7,6 +7,23 @@ import { BASE_URL } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
 
 const Premium = () => {
+
+  const [isUserPremium,setIsUserPremium] = useState(false);
+  useEffect(() => {
+    verifyPremiumUser();
+  }, []);
+  
+  const verifyPremiumUser = async () => {
+    const res = await axios.get(BASE_URL + "/payment/verify", {
+      withCredentials: true,
+    });
+
+    if(res.data.isPremium){
+    setIsUserPremium(res.data.isPremium);
+    }
+  };
+
+
   const handleBuyClick = async (type) => {
     const order = await axios.post(
       BASE_URL + "/payment/create",
@@ -29,6 +46,7 @@ const Premium = () => {
       theme: {
         color: "#F37254",
       },
+      handler:verifyPremiumUser,
     };
 
     //it shohuld open the razor pay dialog box
@@ -36,7 +54,8 @@ const Premium = () => {
     rzp.open();
   };
 
-  return (
+  return isUserPremium ? (
+    "you are already a premium user") : (
     <div className="flex flex-col md:flex-row gap-6 justify-center items-center mt-10">
       {/* Card 1 */}
       {/* <div className="card w-96 bg-base-100 shadow-sm mx-10"> */}
