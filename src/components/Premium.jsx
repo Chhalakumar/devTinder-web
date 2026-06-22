@@ -9,6 +9,7 @@ import { addUser } from "../utils/userSlice";
 const Premium = () => {
 
   const [isUserPremium,setIsUserPremium] = useState(false);
+  
   useEffect(() => {
     verifyPremiumUser();
   }, []);
