@@ -40,100 +40,95 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-      <div className="flex justify-center my-10">
-        <div className="flex justify-center mx-10">
-          <div className="card bg-base-300 w-96 shadow-sm">
-            <div className="card-body">
-              <h2 className="card-title justify-center">Edit profile</h2>
-              <div>
-                <fieldset className="fieldset my-1">
-                  <legend className="fieldset-legend py-2">firstName</legend>
+      <div className="flex flex-col lg:flex-row justify-center items-start gap-6 lg:gap-10 my-6 sm:my-10 px-4">
+        <div className="w-full lg:w-auto flex justify-center">
+          <div className="card bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-xl w-full max-w-md lg:w-96 shadow-2xl border border-purple-500/30">
+            <div className="card-body p-4 sm:p-6">
+              <h2 className="card-title justify-center text-2xl sm:text-3xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">Edit Profile</h2>
+              <div className="space-y-3 sm:space-y-4">
+                <fieldset className="fieldset">
+                  <legend className="fieldset-legend py-2 text-sm sm:text-base text-gray-300">First Name</legend>
                   <input
                     type="text"
                     value={firstName}
-                    className="input input-bordered w-full max-w-xs "
+                    className="input input-bordered w-full bg-gray-800/50 border-gray-600 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all text-sm sm:text-base"
                     onChange={(e) => setFirstName(e.target.value)}
                   />
                 </fieldset>
-              </div>
-              <div>
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend py-2">lastName</legend>
+                  <legend className="fieldset-legend py-2 text-sm sm:text-base text-gray-300">Last Name</legend>
                   <input
                     type="text"
                     value={lastName}
-                    className="input input-bordered w-full max-w-xs "
+                    className="input input-bordered w-full bg-gray-800/50 border-gray-600 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all text-sm sm:text-base"
                     onChange={(e) => setLastName(e.target.value)}
                   />
                 </fieldset>
-              </div>
-              <div>
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend py-2">age</legend>
+                  <legend className="fieldset-legend py-2 text-sm sm:text-base text-gray-300">Age</legend>
                   <input
                     type="text"
                     value={age}
-                    className="input input-bordered w-full max-w-xs "
+                    className="input input-bordered w-full bg-gray-800/50 border-gray-600 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all text-sm sm:text-base"
                     onChange={(e) => setAge(e.target.value)}
                   />
                 </fieldset>
-              </div>
-              <div>
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend py-2">gender</legend>
+                  <legend className="fieldset-legend py-2 text-sm sm:text-base text-gray-300">Gender</legend>
                   <input
                     type="text"
                     value={gender}
-                    className="input input-bordered w-full max-w-xs "
+                    className="input input-bordered w-full bg-gray-800/50 border-gray-600 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all text-sm sm:text-base"
                     onChange={(e) => setGender(e.target.value)}
                   />
                 </fieldset>
-              </div>
-              <div>
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend py-2">about</legend>
+                  <legend className="fieldset-legend py-2 text-sm sm:text-base text-gray-300">About</legend>
                   <input
                     type="text"
                     value={about}
-                    className="input input-bordered w-full max-w-xs "
+                    className="input input-bordered w-full bg-gray-800/50 border-gray-600 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all text-sm sm:text-base"
                     onChange={(e) => setAbout(e.target.value)}
                   />
                 </fieldset>
-              </div>
-              <div>
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend py-2">photoUrl</legend>
+                  <legend className="fieldset-legend py-2 text-sm sm:text-base text-gray-300">Photo URL</legend>
                   <input
                     type="text"
                     value={photoUrl}
-                    className="input input-bordered w-full max-w-xs "
+                    className="input input-bordered w-full bg-gray-800/50 border-gray-600 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all text-sm sm:text-base"
                     onChange={(e) => setPhotoUrl(e.target.value)}
                   />
                 </fieldset>
               </div>
-              <p className="text-red-600">{error}</p>
-              <div className="card-actions justify-center flex  ">
+              {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
+              <div className="card-actions justify-center mt-6">
                 <button
-                  className="btn btn-primary bg-green-500 px-6 py-4 my-2"
+                  className="btn bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 border-0 text-white font-semibold px-8 py-3 shadow-lg hover:shadow-purple-500/50 transition-all duration-300 w-full sm:w-auto"
                   onClick={saveProfile}
                 >
-                  Save profile
+                  Save Profile
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <UserCard
-          user={{ firstName, lastName, age, gender, about, photoUrl }}
-        />
+        
+        {/* Preview Card - Shows below form on mobile, beside form on desktop */}
+        <div className="w-full lg:w-auto flex justify-center">
+          <UserCard
+            user={{ firstName, lastName, age, gender, about, photoUrl }}
+          />
+        </div>
       </div>
-        {showToast && (
-          <div className="toast toast-top toast-center">
-            <div className="alert alert-success">
-              <span>profile saved successfully</span>
-            </div>
+      {showToast && (
+        <div className="toast toast-top toast-center z-[9999]">
+          <div className="alert bg-gradient-to-r from-green-600 to-emerald-600 text-white border-0 shadow-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>Profile saved successfully!</span>
           </div>
-        )}
+        </div>
+      )}
     </>
   );
 };
